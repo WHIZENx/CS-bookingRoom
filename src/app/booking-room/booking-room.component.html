@@ -1,0 +1,257 @@
+<div class="container">
+  <input
+    id="datepick"
+    type="date"
+    min="{{todate | date:'yyyy-MM-dd'}}"
+    value="{{todate | date:'yyyy-MM-dd'}}"
+  />
+  <button class="btn btn-info" (click)="showTable()" style="margin-left: 10px;">
+    ค้นหา
+  </button>
+  <div *ngIf="table">
+    {{room_today}}
+    <div class="card-columns">
+      <div class="card" *ngFor="let r of room;" style="margin: 10px;">
+        <div
+          id="{{r.roomname}}"
+          style="line-height: 150px; cursor: pointer; text-align: center;"
+          (click)="selectRoom(r.roomname)"
+          data-toggle="modal"
+          data-target="#editDateModal"
+        >
+          <b>{{r.roomname}}</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="editDateModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          ห้อง {{room_name}}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6><p>{{detail_room}} {{date_show}}</p></h6>
+        <table style="width: 100%;">
+          <tr>
+            <th id="0" (click)="addbooktime(0)">08:00-11:00</th>
+            <th id="1" (click)="addbooktime(1)">12:00-15:00</th>
+            <th id="2" (click)="addbooktime(2)">15:30-18:30</th>
+          </tr>
+        </table>
+        <div class="desc">
+          <p style="margin-top: 10px;">ระบุรายละเอียดการจอง</p>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">ขื่อวิชา</span>
+            </div>
+            <select
+              class="form-control form-select"
+              [(ngModel)]="subject"
+              required
+              ><option>204111 การเขียนโปรแกรมเบื้องต้น</option>
+              <option>204113 หลักการคอมพิวเตอร์</option>
+              <option>204315 การจัดระเบียบของภาษาโปรแกรม</option>
+              <option>204211 การเขียนโปรแกรมเชิงวัตถุ</option>
+              <option>204251 โครงสร้างข้อมูล</option>
+              <option>204390 การฝึกงานคอมพิวเตอร์</option>
+              <option>204306 จริยธรรมสำหรับผู้ประกอบวิชาชีพคอมพิวเตอร์</option>
+              <option>204321 ระบบฐานข้อมูล 1</option>
+              <option>204341 ระบบปฏิบัติการ</option>
+              <option>204361 วิศวกรรมซอฟต์แวร์</option>
+              <option>204362 การออกแบบเชิงวัตถุ</option>
+              <option>204451 การออกแบบและการวิเคราะห์อัลกอริทึม</option>
+              <option>204231 การจัดระบบและสถาปัตยกรรมคอมพิวเตอร์</option>
+              <option>204113 เครือข่ายคอมพิวเตอร์และเกณฑ์วิธี</option>
+              <option>204113 หลักการคอมพิวเตอร์</option>
+              <option>204113 หลักการคอมพิวเตอร์</option>
+              <option>204325 การวิเคราะห์ระบบงานและการออกแบบงาน</option>
+              <option>204331 การสื่อสารข้อมูลและเครือข่ายคอมพิวเตอร์</option>
+              <option>204333 การพัฒนาโปรแกรมประยุกต์บนอินเทอร์เน็ต</option>
+              <option
+                >204335 ไมโครคอนโทรลเลอร์และอินเทอร์เน็ตของสรรพสิ่ง</option
+              >
+              <option>204355 การเขียนโปรแกรมเชิงแข่งขัน</option>
+              <option>204363 ความต้องการและการสร้างตัวแบบซอฟต์แวร์</option>
+              <option>204364 การออกแบบและสร้างซอฟต์แวร์</option>
+              <option>204365 ปฏิสัมพันธ์ระหว่างมนุษย์และคอมพิวเตอร์</option>
+              <option>204381 การคำนวณเชิงตัวเลขและซอฟต์แวร์</option>
+              <option>204382 คอมพิวเตอร์กราฟฟิก</option>
+              <option>204383 การประมวลผลภาพ</option>
+              <option>204421 ระบบฐานข้อมูล 2</option>
+              <option>204422 การคลังข้อมูล</option>
+              <option>204423 การทำเหมืองข้อมูล</option>
+              <option>204424 การออกแบบและพัฒนาออนโทโลยี</option>
+              <option>204425 ระบบสารสนเทศเพื่อการจัดการ</option>
+              <option>204426 วิศวกรรมข้อมูล</option>
+              <option>204431 ระบบเครือข่ายสากล</option>
+              <option>204432 การออกแบบและจัดการเครือข่ายคอมพิวเตอร์</option>
+              <option>204433 สถาปัตยกรรมคอมพิวเตอร์</option>
+              <option>204435 การประมวลผลแบบขนาน</option>
+              <option>204441 การเขียนโปรแกรมแบบคอนเคอร์เรนท์</option>
+              <option>204442 การสร้างคอมไพเลอร์</option>
+              <option>204443 ความปลอดภัยในระบบคอมพิวเตอร์</option>
+              <option>204452 ทฤษฎีการคำนวณ</option>
+              <option>204453 การรู้จำแบบ</option>
+              <option
+                >204454
+                อัลกอริทึมและการเขียนโปรแกรมในการหาค่าเหมาะที่สุดเชิงการจัด</option
+              >
+              <option>204456 การเรียนรู้ของเครื่อง</option>
+              <option>204471 ปัญญาประดิษฐ์</option>
+              <option>204481 เทคนิคการโปรแกรมเชิงคณิตศาสตร์เบื้องต้น</option>
+              <option>204482 การจำลองแบบมีปัญหาและแบบจำลอง</option>
+              <option>204483 การรับรู้ภาพทางคอมพิวเตอร์</option>
+              <option>204494 หัวข้อเลือกสรรทางวิทยาการคอมพิวเตอร์ 1</option>
+              <option>204495 หัวข้อเลือกสรรทางวิทยาการคอมพิวเตอร์ 2</option>
+              <option>206325 พีชคณิตเชิงเส้น</option>
+              <option>206355 วิธีเชิงตัวเลข</option>
+              <option>206370 ความน่าจะเป็น 1</option>
+              <option>206381 คอมบินาทอริกส์</option>
+              <option>206423 เวฟเลทส์</option>
+              <option>206426 พีชคณิตเชิงเส้น 2</option>
+              <option>206428 ทฤษฎีรหัส</option>
+              <option>206455 การวิเคราะห์เชิงตัวเลข</option>
+              <option>206467 นิวรอลเนทเวิร์ค</option>
+              <option>206481 ทฤษฎีกราฟ</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"
+                >อาจารย์คนที่ 1</span
+              >
+            </div>
+            <select
+              class="form-control form-select"
+              [(ngModel)]="Examiner1"
+              required
+            >
+              <option> รองศาสตราจารย์ ดร.ชุ</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.ดุษฎี ประเสริฐธ</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.ศุภกิจ อาวิพันธุ์</option>
+              <option> ผู้ช่วยศาสตราจารย์ เบญจมาศ ปัญญางาม</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.จักรเมธ บุตรกระจ่าง</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.จักริน ชวชาติ</option>
+              <option> อาจารย์ ดร.รัศมีทิพย์ วิตา</option>
+              <option> องศาสตราจารย์ ดร.รัฐสิทธิ์ สุขะหุต</option>
+              <option> รองศาสตราจารย์ ดร.เอกรัฐ บุญเชียง</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.วิจักษณ์ ศรีสัจจะเลิศวาจา</option>
+              <option> อาจารย์ ดร.วรวุฒิ ศรีสุขคำ</option>
+              <option> รองศาสตราจารย์ ดร.จีรยุทธ ไชยจารุวณิช</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.วัชรี จำปามูล</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.เสมอแข สมหอม</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.เมทินี เขียวกันยะ</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.ชุมพล บุญคุ้มพรภัทร</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.อารีรัตน์ ตรงรัศมีทอง</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.วาริน เชาวทัต</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.วัฒนา จินดาหลวง</option>
+              <option> ผู้ช่วยศาสตราจารย์ วาสนา นัยโพธิ์</option>
+              <option> อาจารย์ ดร.ปราการ อุณจักร</option>
+              <option> อาจารย์ ดร.นพรัตน์ วนิชชานันท์</option>
+              <option> อาจารย์ ดร.ประภาพร เตชอังกูร</option>
+              <option> อาจารย์ ดร.สุธาสินี โทวุฒิกุล</option>
+              <option> อาจารย์ ดร.ปภังกร อิ่นแก้ว</option>
+              <option> อาจารย์ ดร.ฐาปนพงษ์ รักกาญจนันท์</option>
+              <option> อาจารย์กิตติพิชญ์ คุปตะวาณิช</option>
+              <option> อาจารย์สิทธิโชค ทรัพย์ไพบูลย์กิจ</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"
+                >อาจารย์คนที่ 2</span
+              >
+            </div>
+            <select
+              class="form-control form-select"
+              [(ngModel)]="Examiner2"
+              required
+            >
+              <option> - </option>
+              <option> รองศาสตราจารย์ ดร.ชุ</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.ดุษฎี ประเสริฐธ</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.ศุภกิจ อาวิพันธุ์</option>
+              <option> ผู้ช่วยศาสตราจารย์ เบญจมาศ ปัญญางาม</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.จักรเมธ บุตรกระจ่าง</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.จักริน ชวชาติ</option>
+              <option> อาจารย์ ดร.รัศมีทิพย์ วิตา</option>
+              <option> องศาสตราจารย์ ดร.รัฐสิทธิ์ สุขะหุต</option>
+              <option> รองศาสตราจารย์ ดร.เอกรัฐ บุญเชียง</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.วิจักษณ์ ศรีสัจจะเลิศวาจา</option>
+              <option> อาจารย์ ดร.วรวุฒิ ศรีสุขคำ</option>
+              <option> รองศาสตราจารย์ ดร.จีรยุทธ ไชยจารุวณิช</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.วัชรี จำปามูล</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.เสมอแข สมหอม</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.เมทินี เขียวกันยะ</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.ชุมพล บุญคุ้มพรภัทร</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.อารีรัตน์ ตรงรัศมีทอง</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.วาริน เชาวทัต</option>
+              <option> ผู้ช่วยศาสตราจารย์ ดร.วัฒนา จินดาหลวง</option>
+              <option> ผู้ช่วยศาสตราจารย์ วาสนา นัยโพธิ์</option>
+              <option> อาจารย์ ดร.ปราการ อุณจักร</option>
+              <option> อาจารย์ ดร.นพรัตน์ วนิชชานันท์</option>
+              <option> อาจารย์ ดร.ประภาพร เตชอังกูร</option>
+              <option> อาจารย์ ดร.สุธาสินี โทวุฒิกุล</option>
+              <option> อาจารย์ ดร.ปภังกร อิ่นแก้ว</option>
+              <option> อาจารย์ ดร.ฐาปนพงษ์ รักกาญจนันท์</option>
+              <option> อาจารย์กิตติพิชญ์ คุปตะวาณิช</option>
+              <option> อาจารย์สิทธิโชค ทรัพย์ไพบูลย์กิจ</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"
+                >จำนวนผู้เข้าสอบ</span
+              >
+            </div>
+            <input
+              min="0"
+              type="number"
+              class="form-control"
+              aria-label="Capacity"
+              class="form-control"
+              [(ngModel)]="capacity"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div *ngIf="isStaff">
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="booking_db(room_name)"
+            data-dismiss="modal"
+          >
+            จอง
+          </button>
+        </div>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          ปิด
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
